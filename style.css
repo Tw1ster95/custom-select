@@ -1,0 +1,93 @@
+:root {
+    --field-width: 180px;
+    --field-height: 30;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 200px;
+}
+
+customselect {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    border: 1px solid #DCDCDC;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: .3rem;
+    width: var(--field-width);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+customselect::after {
+    content: '\25BC';
+    display: block;
+    position: absolute;
+    right: 5px;
+    font-weight: bold;
+    opacity: .7;
+    top: calc(calc(var(--field-height) / 2) * 1px);
+    transform: translateY(calc(calc(var(--field-height) / -3) * 1px));
+    cursor: pointer;
+    pointer-events: none;
+    user-select: none;
+}
+customselect[data-open]:after {
+    transform: translateY(calc(calc(var(--field-height) / -3) * 1px)) rotate(180deg);
+}
+customselect::-webkit-scrollbar {
+    display: none;
+    width: 5px;
+}
+customselect::-webkit-scrollbar-track {
+    background: #fff;
+}
+customselect::-webkit-scrollbar-thumb {
+    background: #8882;
+    border-radius: 1rem;
+}
+customselect:hover::-webkit-scrollbar-thumb {
+    background: #8885;
+}
+customselect::-webkit-scrollbar-thumb:hover {
+    background: #8889;
+}
+customselect[data-open]::-webkit-scrollbar {
+    display: block;
+}
+
+option {
+    display: block;
+    border-bottom: 1px solid #5456;
+    width: var(--field-width);
+    height: calc(var(--field-height) * 1px);
+    padding: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+option:last-child {
+    border-bottom: none;
+}
+option:hover {
+    background-color: #DCDCDC;
+}
+customselect[data-open] option[selected] {
+    background-color: #F0F0F0;
+}
+customselect:not([data-open]) option {
+    display: none;
+}
+customselect:not([data-open]) option[selected] {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
